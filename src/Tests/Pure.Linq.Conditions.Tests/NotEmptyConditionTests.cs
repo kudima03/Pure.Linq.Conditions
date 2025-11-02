@@ -2,18 +2,18 @@ using Pure.Linq.Conditions.Tests.Fakes;
 
 namespace Pure.Linq.Conditions.Tests;
 
-public sealed record EmptyConditionTests
+public sealed record NotEmptyConditionTests
 {
     [Fact]
     public void ProduceCorrectResultOnEmptyCollection()
     {
-        Assert.True(new EmptyCondition<int>([]).BoolValue);
+        Assert.False(new NotEmptyCondition<int>([]).BoolValue);
     }
 
     [Fact]
     public void ProduceCorrectResultOnNotEmptyCollection()
     {
-        Assert.False(new EmptyCondition<int>(Enumerable.Range(0, 10)).BoolValue);
+        Assert.True(new NotEmptyCondition<int>(Enumerable.Range(0, 10)).BoolValue);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public sealed record EmptyConditionTests
     {
         EnumerableWithEvaluationMarker collection = new EnumerableWithEvaluationMarker();
 
-        _ = new EmptyCondition<int>(collection);
+        _ = new NotEmptyCondition<int>(collection);
 
         Assert.False(collection.Evaluated);
     }
