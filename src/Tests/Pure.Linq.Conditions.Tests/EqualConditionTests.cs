@@ -192,4 +192,107 @@ public sealed record EqualConditionTests
             ).BoolValue
         );
     }
+
+    [Fact]
+    public void ReturnsFalseWhenExtraElementInLaterCollection()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2), new Int(3)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsFalseWhenExtraElementAppearsOnlyInThirdCollection()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2), new Int(3)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsTrueWhenAllCollectionsContainSameElementsNoExtras()
+    {
+        Assert.True(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2), new Int(3)],
+                    [new Int(3), new Int(2), new Int(1)],
+                    [new Int(2), new Int(1), new Int(3)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void DetectsExtraElementInSecondCollection()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2), new Int(3)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void DetectsExtraElementOnlyInThirdCollection()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2), new Int(99)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void DetectsExtraElementWithDifferentCountsAcrossLaterCollections()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(1), new Int(2), new Int(7)], // one 7
+                    [new Int(1), new Int(2), new Int(7), new Int(7)], // two 7s
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void DetectsExtraElementEvenWhenFirstHasDuplicates()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(1), new Int(2)],
+                    [new Int(1), new Int(1), new Int(2)],
+                    [new Int(1), new Int(1), new Int(2), new Int(5)],
+                ]
+            ).BoolValue
+        );
+    }
 }
