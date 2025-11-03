@@ -274,8 +274,8 @@ public sealed record EqualConditionTests
                 (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
                 [
                     [new Int(1), new Int(2)],
-                    [new Int(1), new Int(2), new Int(7)], // one 7
-                    [new Int(1), new Int(2), new Int(7), new Int(7)], // two 7s
+                    [new Int(1), new Int(2), new Int(7)],
+                    [new Int(1), new Int(2), new Int(7), new Int(7)],
                 ]
             ).BoolValue
         );
@@ -291,6 +291,101 @@ public sealed record EqualConditionTests
                     [new Int(1), new Int(1), new Int(2)],
                     [new Int(1), new Int(1), new Int(2)],
                     [new Int(1), new Int(1), new Int(2), new Int(5)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ThrowsOnEmptyInput()
+    {
+        _ = Assert.Throws<ArgumentException>(() =>
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                []
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsFalseWhenCollectionsHaveDifferentLengths()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(1)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsFalseWhenSameLengthButDifferentElements()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                    [new Int(3), new Int(4)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsTrueWhenCollectionsEqualAsMultiset()
+    {
+        Assert.True(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2), new Int(3)],
+                    [new Int(3), new Int(2), new Int(1)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsTrueWhenSingleCollectionProvided()
+    {
+        Assert.True(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [new Int(1), new Int(2)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsFalseWhenAllEmptyExceptOneNonEmpty()
+    {
+        Assert.False(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [],
+                    [new Int(1)],
+                ]
+            ).BoolValue
+        );
+    }
+
+    [Fact]
+    public void ReturnsTrueWhenAllCollectionsEmpty()
+    {
+        Assert.True(
+            new EqualCondition<INumber<int>>(
+                (a, b) => new Primitives.Number.Operations.EqualCondition<int>(a, b),
+                [
+                    [],
+                    [],
+                    [],
                 ]
             ).BoolValue
         );
