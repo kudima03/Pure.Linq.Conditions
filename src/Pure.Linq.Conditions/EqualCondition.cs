@@ -22,18 +22,22 @@ public sealed record EqualCondition<T> : IBool
     {
         get
         {
-            ImmutableArray<ImmutableArray<T>> arrays = [.. _values.Select(x => x.ToImmutableArray())];
+            ImmutableArray<ImmutableArray<T>> arrays =
+            [
+                .. _values.Select(x => x.ToImmutableArray()),
+            ];
 
             return arrays.Length == 0
                 ? throw new ArgumentException()
-                : arrays.Select(a => a.Length).Distinct().Count() == 1 && arrays
-                .First()
-                .All(item =>
-                    arrays
-                        .Select(arr => arr.Count(c => _equals(item, c).BoolValue))
-                        .Distinct()
-                        .Count() == 1
-                );
+                : arrays.Select(a => a.Length).Distinct().Count() == 1
+                    && arrays
+                        .First()
+                        .All(item =>
+                            arrays
+                                .Select(arr => arr.Count(c => _equals(item, c).BoolValue))
+                                .Distinct()
+                                .Count() == 1
+                        );
         }
     }
 }
