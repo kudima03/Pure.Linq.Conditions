@@ -50,19 +50,6 @@ public sealed record EqualCondition<T> : IBool
                 }
             }
 
-            foreach (T item in arrays.Skip(1).SelectMany(x => x))
-            {
-                int counts = arrays
-                    .Select(arr => arr.Count(c => _equals(item, c).BoolValue))
-                    .Distinct()
-                    .Count();
-
-                if (counts != 1)
-                {
-                    return false;
-                }
-            }
-
             return true;
         }
     }
