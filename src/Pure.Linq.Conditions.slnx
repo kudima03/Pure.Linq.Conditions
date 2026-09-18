@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/Pure.Linq.Conditions.Tests/Pure.Linq.Conditions.Tests.csproj" />
+  </Folder>
+  <Project Path="Pure.Linq.Conditions/Pure.Linq.Conditions.csproj" />
+</Solution>
