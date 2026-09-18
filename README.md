@@ -17,7 +17,7 @@ LINQ-compatible `IBool` conditions over `IEnumerable<T>` sequences for the **Pur
 |------|-----------|
 | `EmptyCondition<T>` | The sequence contains no elements |
 | `NotEmptyCondition<T>` | The sequence contains at least one element |
-| `EqualCondition<T>` | Two sequences contain identical elements in the same order |
+| `EqualCondition<T>` | Two sequences contain the same elements with the same multiplicities, regardless of order |
 | `NotEqualCondition<T>` | Two sequences differ in length or element values |
 
 All types accept `IEnumerable<T>` and implement `IBool` from `Pure.Primitives.Abstractions`.
