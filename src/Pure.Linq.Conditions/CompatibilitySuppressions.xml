@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
+<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Pure.Linq.Conditions, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Target>
+    <Left>lib/net9.0/Pure.Linq.Conditions.dll</Left>
+    <Right>lib/net9.0/Pure.Linq.Conditions.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+</Suppressions>
