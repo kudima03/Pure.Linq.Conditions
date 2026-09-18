@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Pure.Primitives.Abstractions.Bool;
 
 namespace Pure.Linq.Conditions;
@@ -22,10 +21,7 @@ public sealed record EqualCondition<T> : IBool
     {
         get
         {
-            ImmutableArray<ImmutableArray<T>> arrays =
-            [
-                .. _values.Select(x => x.ToImmutableArray()),
-            ];
+            T[][] arrays = [.. _values.Select(x => x.ToArray())];
 
             return arrays.Length == 0
                 ? throw new ArgumentException()
