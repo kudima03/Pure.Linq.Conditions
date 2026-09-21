@@ -14,9 +14,13 @@
     <AssemblyName>Pure.Linq.Conditions</AssemblyName>
     <Authors>Dmitry Kurochkin</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/kudima03/Pure.Linq.Conditions</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Pure.Primitives.Bool.Operations" Version="0.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>
