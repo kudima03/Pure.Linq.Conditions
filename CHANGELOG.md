@@ -6,6 +6,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.1.0-preview.0.4.0] — 2026-11-11
+
+- Added `net11.0` as an additional target framework.
+- Updated `Pure.Primitives.Bool.Operations` to `0.6.0`.
+- Maintenance release: CI and tooling updates.
+
 ## [0.1.0-preview.0.3.0] — 2026-09-18
 
 - Added `net7.0`, `net8.0`, and `net10.0` as additional target frameworks alongside `net9.0`.
